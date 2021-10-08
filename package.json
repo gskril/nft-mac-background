@@ -1,0 +1,18 @@
+{
+  "name": "nft-mac-background",
+  "version": "0.0.1",
+  "description": "Set your Mac's desktop background to a slideshow of your latest OpenSea NFTs",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.22.0",
+    "canvas": "^2.8.0",
+    "inquirer": "^8.2.0",
+    "wallpaper": "^5.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "Greg Skriloff",
+  "license": "ISC"
+}
