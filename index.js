@@ -19,7 +19,8 @@ inquirer
 			},
 		},
 		{
-			name: "Background Color",
+			name: "color",
+			message: "Background Color",
 			type: "list",
 			choices: ["White", "Black"],
 		},
