@@ -47,7 +47,7 @@ async function start(wallet, color) {
 				// Get image in higher quality (height of 800px)
 				const imageUrl = nft.image_url + "=h800"
 				// Save images, ignore videos
-				if (!imageUrl.includes(".mp4")) {
+				if (!imageUrl.includes(".mp4") && !imageUrl.includes(".svg") && !imageUrl.includes(".mov")) {
 					// Use canvas to create border around NFT so it fits on the screen
 					const canvas = createCanvas(1920, 1080)
 					const ctx = canvas.getContext("2d")
@@ -58,30 +58,34 @@ async function start(wallet, color) {
 						: (ctx.fillStyle = "#000")
 					ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-					loadImage(imageUrl).then((image) => {
-						// Center image in canvas
-						ctx.drawImage(
-							image,
-							canvas.width / 2 - image.width / 2,
-							canvas.height / 2 - image.height / 2
-						)
+					loadImage(imageUrl)
+						.then((image) => {
+							// Center image in canvas
+							ctx.drawImage(
+								image,
+								canvas.width / 2 - image.width / 2,
+								canvas.height / 2 - image.height / 2
+							)
 
-						let base64Image = canvas
-							.toDataURL()
-							.split(";base64,")
-							.pop()
-						let fileName = "nfts/" + nft.id + ".jpg"
-						fs.writeFile(
-							fileName,
-							base64Image,
-							{
-								encoding: "base64",
-							},
-							function (err) {
-								console.log(fileName + " created")
-							}
-						)
-					})
+							let base64Image = canvas
+								.toDataURL()
+								.split(";base64,")
+								.pop()
+							let fileName = "nfts/" + nft.id + ".jpg"
+							fs.writeFile(
+								fileName,
+								base64Image,
+								{
+									encoding: "base64",
+								},
+								function (err) {
+									console.log(fileName + " created")
+								}
+							)
+						})
+						.catch(err => {
+							console.log("Error creating canvas", err)
+						})
 				}
 			})
 		})
